@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+
+ActiveMembers = []
+
+def addMember(ActiveMembers, MemberToAdd):
+    ActiveMembers.append(MemberToAdd)
+    return ActiveMembers.sort()
+
+def createMember(MemberName):
+    name = input("Name: ")
+    year = input("Year: ")
+    pClass = input("Pledge Class: ")
+    major = input("Major: ")
+    hometown = input("Hometown: ")
+    big = input("Big Brother: ")
+    nickname = input("Frat nickname: ")
+    FavMem = input("Favorite ASig memory: ")
+    WhyJoin = input("Reason they joined Asig: ")
+    
+    MemberName = [name, year, pClass, major, hometown, big, nickname, FavMem, WhyJoin]
+    
+    return MemberName
+
+def printRoster(ActiveMembers):
+    for s in ActiveMembers:
+        print(s[0])
+        
+def printGuide():
+    print("=============================")
+    print("1. View Roster")
+    print("2. Create and Add New Member")
+    print("3. Find Member Info")
+    print("4. Update Member Info")
+    print("5. Quit")
+    print("=============================")
+
+def Main():
+    print("Welcome to the Alpha Sigma Phi roster created by Nolan McDermott!")
+    printGuide()
+    userInput = input("Choose an action: ")
+    while(userInput != '5'):
+        if(userInput == '1'):
+            printRoster(ActiveMembers)
+            printGuide()
+            userInput = input("Choose an action: ")
+        elif(userInput == '2'):
+            userMemberInput = input("Enter member name: ")
+            MemberToAdd = createMember(userMemberInput)
+            addMember(ActiveMembers, MemberToAdd)
+            printGuide()
+            userInput = input("Choose an action: ")
+        
+    
+Main()
