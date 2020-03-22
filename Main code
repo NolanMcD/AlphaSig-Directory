@@ -30,6 +30,27 @@ def printRoster(ActiveMembers):
     for s in ActiveMembers:
         print(s[0])
         
+def binarySearch (arr, l, r, x): 
+    if r >= l:
+        middle = l + (r - l) // 2
+        if arr[middle][0] == x: 
+            return arr[middle]
+        elif arr[middle][0] > x: 
+            return binarySearch(arr, l, middle - 1, x) 
+        else: 
+            return binarySearch(arr, middle + 1, r, x)   
+    else: 
+        return -1
+    
+def findMember(MemberToFind):
+    holder = binarySearch(ActiveMembers, 1, len(ActiveMembers), MemberToFind)
+    if (holder == -1):
+        print("Member not found")
+        return -1
+    else:
+        print(MemberToFind, "found")
+        return holder
+        
 def printGuide():
     print("=============================")
     print("1. View Roster")
@@ -37,6 +58,20 @@ def printGuide():
     print("3. Find Member Info")
     print("4. Update Member Info")
     print("5. Quit")
+    print("=============================")
+    
+def printGuide2():
+    print("=============================")
+    print("1. Name")
+    print("2. Year")
+    print("3. Pledge Class")
+    print("4. Major")
+    print("5. Hometown")
+    print("6. Big Brother")
+    print("7. Nickname")
+    print("8. Favorite ASig Memory")
+    print("9. Why They Joined ASig")
+    print("10. All")
     print("=============================")
 
 def Main():
@@ -54,6 +89,37 @@ def Main():
             addMember(ActiveMembers, MemberToAdd)
             printGuide()
             userInput = input("Choose an action: ")
-        
+        elif(userInput == '3'):
+            userMemberFind = input("Enter member name: ")
+            listOfInfo = findMember(userMemberFind)
+            if(listOfInfo != -1):
+                printGuide2()
+                nextUserInput = input("Chooce what info you want to see: ")
+                intUserInput = int(nextUserInput)
+                if(intUserInput == 10):
+                    for x in listOfInfo:
+                        print(listOfInfo[x])
+                else:
+                    for x in range(1,11):
+                        if (x == intUserInput):
+                            print(listOfInfo[x-1])
+            printGuide()
+            userInput = input("Choose an action: ")
+        elif(userInput == '4'):
+            userMemberFind = input("Enter member name: ")
+            listOfInfo = findMember(userMemberFind)
+            if(listOfInfo != -1):
+                printGuide2()
+                nextUserInput = input("Chooce what you want to change: ")
+                intUserInput = int(nextUserInput)
+                if(intUserInput == 10):
+                    for x in listOfInfo:
+                        newInfo = input("Enter info in order: ")
+                        listOfInfo[x] = newInfo
+                else:
+                    newInfo = input("Enter new information:" )
+                    listOfInfo[intUserInput - 1] = newInfo
+            printGuide()
+            userInput = input("Choose an action: ")
     
 Main()
